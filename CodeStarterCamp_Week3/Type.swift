@@ -44,20 +44,21 @@ class CoffeeShop {
     private var menu: [Coffee] = []
     var barista: Barista?
     var pickUpTable: Coffee?
+    var isBaristaExist: Bool{
+        get {
+            guard barista != nil else {
+                return false
+            }
+            return true
+        }
+    }
     
     init(menu: [Coffee]) {
         self.menu = menu
     }
     
-    func isBaristaExist(barista: Barista?) -> Bool {
-        guard let _ = barista else {
-            return false
-        }
-        return true
-    }
-    
     func order(coffee: Coffee, nameOfCustomer: String) throws {
-        guard isBaristaExist(barista: self.barista) else {
+        guard isBaristaExist else {
             print("현재 카페에 바리스타가 없어서 커피를 만들 수 없습니다!")
             throw CoffeeShopError.noBaristaError
         }
